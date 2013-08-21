@@ -29,13 +29,18 @@ Ext.define('Pagwap.controller.CadastroController', {
 	},
 
 	validarFormulario: function(){
-		var campoCpf = Ext.getCmp('Pagwap_cadastroView_nfCpf');
+		var campoCpf = Ext.getCmp('Pagwap_cadastroView_nfCpf'),
+			campoNome = Ext.getCmp('Pagwap_cadastroView_tfNome');
 
 		if(campoCpf.getValue() == null){
 			Ext.Msg.alert('Campo Obrigatório', 'Preencha o campo CPF', Ext.emptyFn);
 			return false;
 		}
-		
+		else if(campoNome.getValue() == ''){
+			Ext.Msg.alert('Campo Obrigatório', 'Preencha o campo CPF', Ext.emptyFn);
+			return false;
+		}
+
 		return true;
 	}
 
