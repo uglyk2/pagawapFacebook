@@ -1,31 +1,41 @@
 Ext.define('Pagwap.controller.FacebookController', {
 	
 	extend: 'Ext.app.Controller',
-	
-	init: function(){
 
+
+	//Init é padrão do framework, é a primeira coisa que é executada quando essa controller for iniciada
+	init: function(){
+		//definimos uma variável me, que será o contexto de toda controller pra conseguirmos acessar outras funções dentro dela
 		var me = this;
 		
+		//definimos o controlador de elementos html que ficará ouvindo possíveis eventos definidos de cada elemento
 		me.control({
+			//estamos ouvindo tudo o que acontece com o botão btnLogin
 			'button[id=Pagwap_btnLogin]': {
+				//chama a função login dentro dessa controller, assim que o botão for clicado (tap)
 				tap: me.login
 			}
 		});
 
+		//Quando a API do facebook for carregada
 		window.fbAsyncInit = function() {
-	            // init the FB JS SDK
+
+	            // Inicializando a conexão do javascript com a API
 		        FB.init({
-		          appId      : '183806761801158',                        // App ID from the app dashboard
-		          channelUrl : 'https://mercancianews.com.br/pagwapfacebook/', // Channel file for x-domain comms
-		          status     : true,                                 // Check Facebook Login status
-		          xfbml      : true                                  // Look for social plugins on the page
+		          appId      : '183806761801158',                        
+		          channelUrl : 'https://mercancianews.com.br/pagwapfacebook/', 
+		          status     : true,                                 
+		          xfbml      : true                                  
 		        });
 
+		        //Verificamos se o usuário está logado
 		        if(me.getLogin()){
+		        	//Estando logado pegamos os dados do usuário e gravamos na variável "userData" que está nesta controller
 		        	FB.api('/me', function(response) {
 			       		me.setUserData(response);
-			       		Ext.getCmp('Pagwap_view_Main').add(Ext.create('Pagwap.view.cadastroView'));
-			       		//Ext.getCmp('Pagwap_view_Main').add([Ext.create('Pagwap.view.transacaoView')]);
+			       		
+			       		//setarView, faz uma requisição e verifica se o usuário já está no mercancia ou se é novo e então abre o cadastro ou transação
+			       		me.setarView();
 			     	});
 		        }
 		        else {
@@ -85,6 +95,31 @@ Ext.define('Pagwap.controller.FacebookController', {
 		   	}
 		}, {
 			scope: 'email,user_location,user_photos'
+		});
+	},
+
+	setarView: function(){
+		var me = this, userdata = me.userData;
+
+		Ext.Ajax.request({
+		    url: 'https://www.mercancia.com.br/meucu/',
+		    params: {
+		        id_facebook: userdata.id
+		    },
+		    success: function(response){
+		        var json = JSON.parse(response.responseText);
+		        // process server response here
+		        if(json.cadastrado){
+		        	Ext.getCmp('Pagwap_view_Main').add([Ext.create('Pagwap.view.transacaoView')]);
+		        }
+		        else {
+		        	Ext.getCmp('Pagwap_view_Main').add(Ext.create('Pagwap.view.cadastroView'));
+		        }
+		    },
+		    failure: function(){
+		    	console.log('Falha na requisição talvez não existe a URL ou seilá o capeta baixou');
+		    	Ext.getCmp('Pagwap_view_Main').add(Ext.create('Pagwap.view.cadastroView'));
+		    }
 		});
 	},
 
