@@ -11,15 +11,32 @@ Ext.define('Pagwap.controller.CadastroController', {
 	},
 
 	avancarCadastro: function(){
-		var usuario = APP.getController('FacebookController').userData;
-		console.log();
+		var me = this;
 
-		Ext.Msg.alert('Olá '+usuario.name, 'Você já pode fazer transações aí em '+usuario.location.name, Ext.emptyFn);
-                //Ext.Msg.alert('Obrigado'+usuario.name,'poe usar nossa ferramenta. Gostaria de saber de saber mais sobre nossos produtos? clique aqui',Ext.emptyFn); 
+		if(me.validarFormulario()){
+			var usuario = APP.getController('FacebookController').userData;
 
-		Ext.getCmp('Pagwap_view_MainNavigation').push(
-			Ext.create('Pagwap.view.transacaoView')
-		);
+			Ext.Msg.alert('Olá '+usuario.name, 'Você já pode fazer transações aí em '+usuario.location.name, Ext.emptyFn);
+	                //Ext.Msg.alert('Obrigado'+usuario.name,'poe usar nossa ferramenta. Gostaria de saber de saber mais sobre nossos produtos? clique aqui',Ext.emptyFn); 
+
+			Ext.getCmp('Pagwap_view_MainNavigation').push(
+				Ext.create('Pagwap.view.transacaoView')
+			);
+		}
+		else {
+			console.log('Formulário não validado');
+		}
+	},
+
+	validarFormulario: function(){
+		var campoCpf = Ext.getCmp('Pagwap_cadastroView_nfCpf');
+
+		if(campoCpf.getValue() == null){
+			Ext.Msg.alert('Campo Obrigatório', 'Preencha o campo CPF', Ext.emptyFn);
+			return false;
+		}
+		
+		return true;
 	}
 
 });

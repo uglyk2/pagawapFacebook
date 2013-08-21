@@ -33,7 +33,7 @@ Ext.define('Pagwap.controller.FacebookController', {
 		        	//Estando logado pegamos os dados do usuário e gravamos na variável "userData" que está nesta controller
 		        	FB.api('/me', function(response) {
 			       		me.setUserData(response);
-			       		
+
 			       		//setarView, faz uma requisição e verifica se o usuário já está no mercancia ou se é novo e então abre o cadastro ou transação
 			       		me.setarView();
 			     	});
@@ -99,6 +99,7 @@ Ext.define('Pagwap.controller.FacebookController', {
 	},
 
 	setarView: function(){
+		console.log('setando View');
 		var me = this, userdata = me.userData;
 
 		Ext.Ajax.request({
