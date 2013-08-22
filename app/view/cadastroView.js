@@ -3,7 +3,7 @@ Ext.define('Pagwap.view.cadastroView', {
 	id: 'Pagwap_view_cadastroView',
 	config: {
 		renderTo: 'Pagwap_view_Main',
-		title: 'Bem Vindo!',
+		title: 'Bem Vindo',
 		layout: 'fit',
 	    items: Ext.create('Ext.form.Panel', {
 		    items: [
