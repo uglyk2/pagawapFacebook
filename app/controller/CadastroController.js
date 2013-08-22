@@ -38,7 +38,7 @@ Ext.define('Pagwap.controller.CadastroController', {
 			Ext.Msg.alert('Campo Obrigatório', 'Preencha o campo CPF', Ext.emptyFn);
 			return false;
 		}
-		
+		//dei o cú
 		else if (campoAg.getValue() == null) {
 			Ext.Msg.alert('Campo Obrigatório', 'Preencha o campo Agencia', Ext.emptyFn);
 			return false;
