@@ -55,13 +55,16 @@ Ext.define('Pagwap.view.cadastroView', {
                 	xtype:'numberfield',
                 	name:'Agencia',
                 	label:'Agência :',
-                    emptyText: 'Caso tenha Dígito coloque Hífen. Ex: 12345-8'
+                    placeholder: 'Caso tenha Dígito coloque Hífen. Ex: 12345-8',
+                    id:'Pagwap_cadastroView_nfAgencia'
+                    
                 },
                 {
                 	xtype:'numberfield',
                     name:'Conta',
                     label:'Conta :',
-                    emptyText: 'Caso tenha Dígito coloque Hífen. Ex: 12345-8'
+                    placeholder: 'Caso tenha Dígito coloque Hífen. Ex: 12345-8',
+                    id:'Pagwap_cadastroView_nfConta'
                 },
                 {
                     xtype: 'button',
