@@ -30,7 +30,7 @@ Ext.define('Pagwap.controller.CadastroController', {
 
 	validarFormulario: function(){
 		var campoCpf = Ext.getCmp('Pagwap_cadastroView_nfCpf'),
-			campoNome = Ext.getCmp('Pagwap_cadastroView_tfNome'),
+			campoNome = Ext.getCmp('Pagwap_cadastroView_tfTitular'),
 			campoAg = Ext.getCmp('Pagwap_cadastroView_nfAgencia'),
 			campoConta = Ext.getCmp('Pagwap_cadastroView_nfConta')
 
