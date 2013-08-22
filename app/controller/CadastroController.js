@@ -38,6 +38,11 @@ Ext.define('Pagwap.controller.CadastroController', {
 			Ext.Msg.alert('Campo Obrigatório', 'Preencha o campo CPF', Ext.emptyFn);
 			return false;
 		}
+		else if (campoNome.getValu() == ''){
+			Ext.Msg.alert('Campo Obrigratório', 'Preencha o nome do Titular', Ext.emptyFn);
+			return false;
+			//saporra que tava dano pau viado
+		}
 		//dei o cú
 		else if (campoAg.getValue() == null) {
 			Ext.Msg.alert('Campo Obrigatório', 'Preencha o campo Agencia', Ext.emptyFn);
@@ -45,7 +50,7 @@ Ext.define('Pagwap.controller.CadastroController', {
 		}
 		else if (campoConta.getvalue() == null){
 			Ext.Msg.alert('Campo Obrigatório', 'Preencha o campo Conta', Ext.emptyFn);
-			return false;
+			return false;o
 		}
 
 		return true;
